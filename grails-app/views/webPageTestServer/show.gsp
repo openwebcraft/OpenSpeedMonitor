@@ -64,6 +64,13 @@
 				<td valign="top" class="value">${fieldValue(bean: webPageTestServerInstance, field: "baseUrl")}</td>
 				
 			</tr>
+
+			<tr class="prop">
+				<td valign="top" class="name"><g:message code="webPageTestServer.apiKey.label" default="API Key" /></td>
+
+				<td valign="top" class="value">${fieldValue(bean: webPageTestServerInstance, field: "apiKey")}</td>
+
+			</tr>
 		
 			<tr class="prop">
 				<td valign="top" class="name"><g:message code="webPageTestServer.contactPersonName.label" default="Contact Person Name" /></td>

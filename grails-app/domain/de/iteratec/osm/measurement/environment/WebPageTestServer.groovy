@@ -29,11 +29,12 @@ class WebPageTestServer {
     String label
     String proxyIdentifier
 
-    Date	dateCreated
+    Date    dateCreated
     Date	lastUpdated
     Long	id
 
     String baseUrl
+    String apiKey
     Boolean active
     String description
     String contactPersonName
@@ -47,6 +48,7 @@ class WebPageTestServer {
         active()
         description(nullable: true, widget: 'textarea', maxSize: 255)
         baseUrl(blank: false, url: ["localhost(:(\\d{1,5}))?"], maxSize: 255)
+        apiKey(nullable: true, maxSize: 255)
         contactPersonName(maxSize: 200, nullable: true)
         contactPersonEmail(email: true, nullable: true, maxSize: 255)
     }

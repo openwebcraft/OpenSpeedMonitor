@@ -83,7 +83,9 @@ class ProxyService {
 //		}
 //		urlEncodedQueryString=urlEncodedQueryString.substring(0, urlEncodedQueryString.size()-1)
 //		log.info("queryStringScript=$urlEncodedQueryString")
-			
+
+
+		params.put('k', wptserver.apiKey)
 		return httpRequestService.getRestClientFrom(wptserver).post(
 			path: 'runtest.php',
 			query: params,
@@ -95,6 +97,7 @@ class ProxyService {
 	}
 	
 	HttpResponseDecorator cancelTest(WebPageTestServer wptserver, Map params) {
+		params.put('k', wptserver.apiKey)
 		return httpRequestService.getRestClientFrom(wptserver).post(
 			path: 'cancelTest.php',
 			query: params,
@@ -108,7 +111,7 @@ class ProxyService {
 	 * 			Instance of PHP-application webpagetest (see http://webpagetest.org).
 	 */
 	void fetchLocations(WebPageTestServer wptserver) {
-		
+
 		def locationsResponse = httpRequestService.getWptServerHttpGetResponseAsGPathResult(wptserver, 'getLocations.php', [:], ContentType.TEXT, [Accept: 'application/xml'])
 		
 		log.info("${this.listener.size} iListener(s) listen to the fetching of locations")
@@ -184,7 +187,7 @@ class ProxyService {
 	
 	private GPathResult getXmlResult(WebPageTestServer wptserverOfResult, Map params){
 		return httpRequestService.getWptServerHttpGetResponseAsGPathResult(wptserverOfResult, 'xmlResult.php',
-				['f': 'xml', 'test': params.resultId, 'r': params.resultId], ContentType.TEXT, [Accept: 'application/xml'])
+				['f': 'xml', 'test': params.resultId, 'r': params.resultId, 'k': wptserverOfResult.apiKey]	, ContentType.TEXT, [Accept: 'application/xml'])
 	}
 	
 }

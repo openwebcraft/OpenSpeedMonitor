@@ -37,6 +37,13 @@
 				</div>
 			</div>
 
+			<div class="control-group fieldcontain ${hasErrors(bean: webPageTestServerInstance, field: 'apiKey', 'error')} ">
+				<label for="apiKey" class="control-label"><g:message code="webPageTestServer.apiKey.label" default="API Key" /></label>
+				<div class="controls">
+					<g:textField name="apiKey" value="${webPageTestServerInstance?.apiKey}"/>
+				</div>
+			</div>
+
 			<div class="control-group fieldcontain ${hasErrors(bean: webPageTestServerInstance, field: 'contactPersonName', 'error')} ">
 				<label for="contactPersonName" class="control-label"><g:message code="webPageTestServer.contactPersonName.label" default="Contact Person Name" /></label>
 				<div class="controls">

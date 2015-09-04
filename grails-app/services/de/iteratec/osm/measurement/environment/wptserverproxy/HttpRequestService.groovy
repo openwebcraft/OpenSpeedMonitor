@@ -16,18 +16,17 @@
 */
 
 package de.iteratec.osm.measurement.environment.wptserverproxy
-
-import groovy.json.JsonSlurper
+import de.iteratec.osm.measurement.environment.WebPageTestServer
 import groovy.util.slurpersupport.GPathResult
 import groovyx.net.http.ContentType
 import groovyx.net.http.RESTClient
-import de.iteratec.osm.measurement.environment.WebPageTestServer
 
 class HttpRequestService {
 
 	private Map<String, RESTClient> clients = new HashMap()
 
 	Object getWptServerHttpGetResponse(WebPageTestServer wptserver, String path, Map query, ContentType contentType, Map headers){
+		query.put('k', wptserver.apiKey)
 		getRestClientFrom(wptserver).get(
 			path: path,
 			query: query,
