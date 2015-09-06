@@ -187,7 +187,7 @@ class ProxyService {
 	
 	private GPathResult getXmlResult(WebPageTestServer wptserverOfResult, Map params){
 		return httpRequestService.getWptServerHttpGetResponseAsGPathResult(wptserverOfResult, 'xmlResult.php',
-				['f': 'xml', 'test': params.resultId, 'r': params.resultId, 'k': wptserverOfResult.apiKey]	, ContentType.TEXT, [Accept: 'application/xml'])
+				['f': 'xml', 'test': params.resultId, 'r': params.resultId], ContentType.TEXT, [Accept: 'application/xml'])
 	}
 	
 }
