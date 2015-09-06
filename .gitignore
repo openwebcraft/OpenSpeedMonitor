@@ -49,3 +49,5 @@ testorder*.txt
 
 #ignore  dataSource-Config
 OpenSpeedMonitor-config.groovy
+
+*.sh
