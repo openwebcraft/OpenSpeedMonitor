@@ -30,6 +30,14 @@
  *
  */
 // general settings
+def credentials = [
+        hostname: System.getProperty("RDS_HOSTNAME"),
+        dbname: System.getProperty("RDS_DB_NAME"),
+        username: System.getProperty("RDS_USERNAME"),
+        password: System.getProperty("RDS_PASSWORD"),
+        port: System.getProperty("RDS_PORT")
+]
+
 dataSource {
     pooled = true
     driverClassName = "org.h2.Driver"
@@ -57,9 +65,22 @@ environments {
         }
     }
     production {
-			dataSource {
-            dbCreate = "update"// one of 'create', 'create-drop', 'update', 'validate', ''
-            url = "jdbc:h2:mem:testDb;MVCC=TRUE;LOCK_TIMEOUT=10000"
-        }
+		dataSource {
+			dbCreate = "update"// one of 'create', 'create-drop', 'update', 'validate', ''
+			url = "jdbc:mysql://${credentials.hostname}:${credentials.port}/${credentials.dbname}"
+            username = "${credentials.username}"
+            password = "${credentials.password}"
+            driverClassName = "com.mysql.jdbc.Driver"
+			pooled = true
+			properties {
+				minEvictableIdleTimeMillis = 60000
+				timeBetweenEvictionRunsMillis = 5000
+				numTestsPerEvictionRun=3
+				testOnBorrow=true
+				testWhileIdle=true
+				testOnReturn = false
+				validationQuery="SELECT 1"
+			}
+		}
     }
 }

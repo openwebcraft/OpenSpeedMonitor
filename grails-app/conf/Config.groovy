@@ -21,6 +21,13 @@ import org.apache.log4j.RollingFileAppender
 * limitations under the License.
 */
 
+def credentials = [
+        serverURL: System.getProperty("GRAILS_SERVER_URL"),
+        initialOsmAdminUser: System.getProperty("OSM_INITIAL_ADMIN_USER_NAME"),
+        initialOsmAdminPassword: System.getProperty("OSM_INITIAL_ADMIN_USER_PASSWORD"),
+        initialOsmRootUser: System.getProperty("OSM_INITIAL_ROOT_USER_NAME"),
+        initialOsmRootPassword: System.getProperty("OSM_INITIAL_ROOT_USER_PASSWORD")
+]
 
 def appNameForLog4jConfig = appName
 
@@ -349,7 +356,12 @@ environments {
     production {
 
         //base url of osm instance can be configured here or in external configuration file (see grails-app/conf/OpenSpeedMonitor-config.groovy.sample)
-        //grails.serverURL = "https://[base-url-of-your-prod-osm-instance]"
+	grails.serverURL = "${credentials.serverURL}"
+
+        grails.de.iteratec.osm.security.initialOsmAdminUser.username = "${credentials.initialOsmAdminUser}"
+        grails.de.iteratec.osm.security.initialOsmAdminUser.password = "${credentials.initialOsmAdminPassword}"
+        grails.de.iteratec.osm.security.initialOsmRootUser.username = "${credentials.initialOsmRootUser}"
+        grails.de.iteratec.osm.security.initialOsmRootUser.password = "${credentials.initialOsmRootPassword}"
 
         grails.logging.jul.usebridge = false
 
